@@ -13,7 +13,11 @@ export default function App(): JSX.Element {
   ): void => {
     e.preventDefault();
     const arr = value.split('+');
-    if (arr.length !== 2)
+    if (
+      arr.length !== 2 &&
+      !Number.isInteger(+arr[0]) &&
+      !Number.isInteger(+arr[1])
+    )
       setMessages([...messages, value, 'Что-то пошло не так :(']);
 
     const sum = (+arr[0] + +arr[1]).toString();
@@ -37,7 +41,10 @@ export default function App(): JSX.Element {
   return (
     <>
       <header className={css.header}>
-        <img src={avatar} alt="Chatbot avatar" />
+        <img
+          src={avatar}
+          alt="Chatbot avatar"
+        />
         <span>CalculatorBot</span>
       </header>
       <ul className={css.chatbox}>{createListItem(messages)}</ul>
