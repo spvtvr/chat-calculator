@@ -13,15 +13,12 @@ export default function App(): JSX.Element {
   ): void => {
     e.preventDefault();
     const arr = value.split('+');
-    if (
-      arr.length !== 2 &&
-      !Number.isInteger(+arr[0]) &&
-      !Number.isInteger(+arr[1])
-    )
+    
+    if (arr.length !== 2)
       setMessages([...messages, value, 'Что-то пошло не так :(']);
 
     const sum = (+arr[0] + +arr[1]).toString();
-    sum === 'NaN'
+    sum === 'NaN' || !(+arr[0] % 1 === 0) || !(+arr[1] % 1 === 0)
       ? setMessages([...messages, value, 'Что-то пошло не так :('])
       : setMessages([...messages, value, sum]);
     setValue('');
